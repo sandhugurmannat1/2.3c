@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <div v-html="htmlContent"></div>
+    <input :id="elementId" />
+    <p>{{ 'Result: ' + (num1 + num2) }}</p>
+
+    <button @click="sayHello">Click me</button>
+
+    <p>Count: {{ count }}</p>
+    <button @click="increment">Increment</button>
+
+    <p>Computed Result: {{ computedValue }}</p>
+
+    <div :class="{ active: isActive }" :style="{ color: textColor }">Styled Element</div>
+  </div>
+
+  <script>
+    const { ref, computed, createApp } = Vue;
+
+    createApp({
+      setup() {
+        const message = ref('Hello, Vue!');
+        const htmlContent = '<strong>Rendered as HTML</strong>';
+        const elementId = 'unique-id';
+        const num1 = 10;
+        const num2 = 20;
+
+        const sayHello = () => {
+          alert('Hello from Vue method!');
+        };
+
+        const count = ref(0);
+        const increment = () => {
+          count.value++;
+        };
+
+        const computedValue = computed(() => {
+          return num1 * num2;
+        });
+
+        const isActive = ref(true);
+        const textColor = ref('blue');
+
+        return {
+          message,
+          htmlContent,
+          elementId,
+          num1,
+          num2,
+          sayHello,
+          count,
+          increment,
+          computedValue,
+          isActive,
+          textColor,
+        };
+      },
+    }).mount('#app');
+  </script>
+
+  <style scoped>
+    .active {
+      font-weight: bold;
+    }
+  </style>
+</body>
+
+</html>
